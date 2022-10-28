@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cliente {
+  id       Int     @id @unique(map: "id_UNIQUE") @db.UnsignedInt
+  nombre   String? @unique(map: "nombre_UNIQUE") @db.VarChar(15)
+  maximo3  String? @db.VarChar(3)
+  entero   Int?
+  nonulo   String  @db.VarChar(10)
+  positivo Int?    @unique(map: "positivo_UNIQUE") @db.UnsignedInt
+}

@@ -1,0 +1,11 @@
+.react-datepicker-wrapper {
+    width: 165px !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+@media print {
+    .print-content {
+        display: block;
+    }
+}
