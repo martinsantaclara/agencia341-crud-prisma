@@ -215,7 +215,7 @@ const Customers = () => {
     const eliminaCliente = async (id) => {
         // `http://localhost:3000/api/clientes/${id}`
 
-        const { data } = await axios.delete(`${baseUrl}/api/clientes/${id}`);
+        const { data } = await axios.delete(`/api/clientes/${id}`);
     };
 
     const elimina = async (id) => {
@@ -287,11 +287,7 @@ const Customers = () => {
         } else {
             // 'http://localhost:3000/api/clientes',
 
-            const { data } = await axios.put(
-                `${baseUrl}/api/clientes`,
-                body,
-                header
-            );
+            const { data } = await axios.put(`/api/clientes`, body, header);
             return data;
         }
     };
