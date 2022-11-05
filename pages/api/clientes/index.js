@@ -5,7 +5,13 @@ const prisma = new PrismaClient();
 const handler = async (req, res) => {
     if (req.method === 'GET') {
         try {
-            const allClientes = await prisma.cliente.findMany();
+            // const allClientes = await prisma.cliente.findMany();
+            const allClientes = await prisma.cliente.findMany({
+                include: {
+                    localidades: true, // Return all fields
+                },
+            });
+
             res.status(200).json(allClientes);
         } catch (error) {
             handleError(res, error);

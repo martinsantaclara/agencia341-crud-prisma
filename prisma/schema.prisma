@@ -8,10 +8,20 @@ datasource db {
 }
 
 model cliente {
-  id       Int     @id @unique(map: "id_UNIQUE") @db.UnsignedInt
-  nombre   String? @unique(map: "nombre_UNIQUE") @db.VarChar(15)
-  maximo3  String? @db.VarChar(3)
-  entero   Int?
-  nonulo   String  @db.VarChar(10)
-  positivo Int?    @unique(map: "positivo_UNIQUE") @db.UnsignedInt
+  id          Int          @id @unique(map: "id_UNIQUE") @db.UnsignedInt
+  nombre      String?      @unique(map: "nombre_UNIQUE") @db.VarChar(15)
+  maximo3     String?      @db.VarChar(3)
+  entero      Int?         @unique(map: "entero_UNIQUE")
+  nonulo      String       @db.VarChar(10)
+  positivo    Int?         @unique(map: "positivo_UNIQUE") @db.UnsignedInt
+  idLocalidad Int?         @db.UnsignedInt
+  localidades localidades? @relation(fields: [idLocalidad], references: [idLocalidad], onDelete: NoAction, onUpdate: NoAction, map: "fk_localidad")
+
+  @@index([idLocalidad], map: "fk_localidad_idx")
+}
+
+model localidades {
+  idLocalidad     Int       @id @unique(map: "idLocalidad_UNIQUE") @default(autoincrement()) @db.UnsignedInt
+  nombreLocalidad String    @unique(map: "nombreLocalidad_UNIQUE") @db.VarChar(45)
+  cliente         cliente[]
 }

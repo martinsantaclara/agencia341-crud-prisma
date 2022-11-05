@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import { useRouter } from 'next/router';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -52,6 +53,8 @@ const Customers = () => {
 
     // const { data, error } = useSWR('/api/clientes', fetcher);
 
+    const router = useRouter();
+
     const { darkMode } = useStateContext();
     const [dialogBox, setDialogBox] = useState(false);
 
@@ -79,6 +82,7 @@ const Customers = () => {
     const obtenerClientes = async () => {
         try {
             const { data } = await axios.get(`/api/clientes`);
+            console.log(data);
             setClientes(data);
             setPendiente(false);
         } catch (error) {
@@ -336,6 +340,10 @@ const Customers = () => {
         );
     };
 
+    const printCliente = () => {
+        router.push(`/pruebaprint/2002-10-05`);
+    };
+
     // if (!data) return <div>Loading...</div>;
     //  else {
     //     console.log(data.data);
@@ -361,6 +369,7 @@ const Customers = () => {
                         >
                             Lista de Clientes
                         </CardHeader>
+                        <button onClick={printCliente}>Imprimir</button>
                         <CardBody
                             style={{
                                 backgroundColor: darkMode
