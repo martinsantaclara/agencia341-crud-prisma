@@ -6,6 +6,8 @@
         "dev": "explorer http://localhost:3000 & next dev",
         "build": "next build",
         "start": "next start",
+        "vercel-build": "prisma generate && prisma migrate deploy && next build",
+        "prisma:generate": "prisma generate",
         "lint": "next lint"
     },
     "dependencies": {
