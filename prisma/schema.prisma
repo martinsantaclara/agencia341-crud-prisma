@@ -16,7 +16,7 @@ model cliente {
   positivo    Int?         @unique(map: "positivo_UNIQUE") @db.UnsignedInt
   idLocalidad Int?         @db.UnsignedInt
   localidades localidades? @relation(fields: [idLocalidad], references: [idLocalidad], onDelete: NoAction, onUpdate: NoAction, map: "fk_localidad")
-
+  
   @@index([idLocalidad], map: "fk_localidad_idx")
 }
 
