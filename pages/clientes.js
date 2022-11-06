@@ -84,7 +84,8 @@ const Customers = () => {
         try {
             const { data } = await axios.get(`/api/clientes`);
             console.log(data);
-            setClientes(data);
+            // setClientes(data);
+            setClientes([]);
             setPendiente(false);
         } catch (error) {
             console.log(error);
