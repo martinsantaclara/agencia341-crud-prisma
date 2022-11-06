@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { useRouter } from 'next/router';
@@ -84,8 +84,7 @@ const Customers = () => {
         try {
             const { data } = await axios.get(`/api/clientes`);
             console.log(data);
-            // setClientes(data);
-            setClientes([]);
+            setClientes(data);
             setPendiente(false);
         } catch (error) {
             console.log(error);
@@ -348,6 +347,19 @@ const Customers = () => {
             }
         );
     };
+
+    const ProgressText = () => {
+        return (
+            <p style={{ fontSize: '24px', fontWeight: '700', padding: '24px' }}>
+                Obteniendo Datos..
+            </p>
+        );
+    };
+
+    const NoDataText = () => {
+        return <p style={{ padding: '24px' }}>No hay datos para mostrar</p>;
+    };
+
     return (
         <>
             <Layout>
@@ -420,6 +432,8 @@ const Customers = () => {
                                 columns={columns}
                                 data={clientes}
                                 progressPending={pendiente}
+                                progressComponent={<ProgressText />}
+                                noDataComponent={<NoDataText />}
                                 pagination
                                 paginationComponentOptions={
                                     paginationComponentOptions
