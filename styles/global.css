@@ -4,6 +4,12 @@
     justify-content: center !important;
 }
 
+.indicator {
+    color: gray;
+    font-size: 24px;
+    font-weight: 800;
+}
+
 @media print {
     .print-content {
         display: block;

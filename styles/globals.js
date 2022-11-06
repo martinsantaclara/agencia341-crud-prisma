@@ -60,6 +60,7 @@ export const Container = styled.div`
     justify-content: ${({ crud }) => (crud ? 'center' : 'space-between')};
     align-items: ${({ align }) => align};
     margin-top: ${({ crud }) => (crud ? '50px' : '')};
+    max-width: ${({ print }) => (print ? '1110px' : '')};
     z-index: 1;
 `;
 
@@ -78,4 +79,37 @@ export const MobileMenuContainer = styled.div`
 
 export const Button = styled.button`
     ${sharedStyleButtons}
+`;
+
+export const TitleCardHeader = styled.p``;
+
+export const Printer = styled.img`
+    width: 64px;
+    height: 64px;
+`;
+
+export const HeaderPrint = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background-color: hsl(235 69% 61%);
+    color: hsl(0 0% 100%);
+    padding: 1rem 2rem;
+    max-width: 950px;
+`;
+
+export const HeaderLeft = styled.p`
+    font-size: 1rem;
+    font-weight: 400;
+`;
+
+export const HeaderTitle = styled.p`
+    font-size: 1.5rem;
+    font-weight: 600;
+`;
+
+export const HeaderRight = styled.p`
+    font-size: 0.875rem;
+    font-weight: 400;
 `;

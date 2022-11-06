@@ -33,6 +33,8 @@ export const StateContext = ({ children }) => {
     const [ventas, setVentas] = useState([]);
     const [resumenDiario, setResumenDiario] = useState();
 
+    const [clientes, setClientes] = useState([]);
+
     useEffect(() => {
         const themeLocalStorage = window.localStorage.getItem('theme');
         if (themeLocalStorage !== null) {
@@ -96,6 +98,8 @@ export const StateContext = ({ children }) => {
                                     setVentas,
                                     resumenDiario,
                                     setResumenDiario,
+                                    clientes,
+                                    setClientes,
                                 }}
                             >
                                 <GlobalStyles />

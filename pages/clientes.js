@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +12,7 @@ import { Button, Card, CardBody, CardHeader } from 'reactstrap';
 import { FaPenAlt, FaTrashAlt } from 'react-icons/fa';
 
 import { Layout } from '../layout/Layout';
-import { Container } from '../styles/globals';
+import { Container, Printer, TitleCardHeader } from '../styles/globals';
 import {
     ModalBodyStyled,
     ModalCardBody,
@@ -25,7 +26,7 @@ import { LinkWrapper } from '../components/LandingPage/Header/headerStyles';
 import { FcBusinessman } from 'react-icons/fc';
 import ReactTooltip from 'react-tooltip';
 import { FaPlusCircle } from 'react-icons/fa';
-import { useDeviceContext, useStateContext } from '../context/StateContext';
+import { useVentasContext, useStateContext } from '../context/StateContext';
 import Dialog from '../components/Commons/DialogBox/dialog';
 import { SubmitButton } from '../components/Commons/DialogBox/dialogStyles';
 
@@ -45,15 +46,15 @@ const Customers = () => {
     const [cliente, setCliente] = useState(modeloCliente);
     const [apeynom, setApeynom] = useState('');
     const [pendiente, setPendiente] = useState(true);
-    const [clientes, setClientes] = useState([]);
+    // const [clientes, setClientes] = useState([]);
     const [verModal, setVerModal] = useState(false);
+
+    const { clientes, setClientes } = useVentasContext();
 
     // const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     // console.log(baseUrl);
 
     // const { data, error } = useSWR('/api/clientes', fetcher);
-
-    const router = useRouter();
 
     const { darkMode } = useStateContext();
     const [dialogBox, setDialogBox] = useState(false);
@@ -108,6 +109,11 @@ const Customers = () => {
             name: 'id',
             selector: (row) => row.id,
             sortable: true,
+            // center: true,
+            width: '150px',
+            style: {
+                paddingLeft: '65px',
+            },
         },
         {
             name: 'nombre',
@@ -122,6 +128,7 @@ const Customers = () => {
         {
             name: 'entero',
             selector: (row) => row.entero,
+            center: true,
         },
         {
             name: 'nonulo',
@@ -130,6 +137,7 @@ const Customers = () => {
         {
             name: 'positivo',
             selector: (row) => row.positivo,
+            center: true,
         },
         {
             name: '',
@@ -339,15 +347,6 @@ const Customers = () => {
             }
         );
     };
-
-    const printCliente = () => {
-        router.push(`/pruebaprint/2002-10-05`);
-    };
-
-    // if (!data) return <div>Loading...</div>;
-    //  else {
-    //     console.log(data.data);
-    //     setClientes(data);
     return (
         <>
             <Layout>
@@ -365,11 +364,27 @@ const Customers = () => {
                                 color: 'hsl(0 0% 100%)',
                                 fontSize: '1rem',
                                 fontWeight: '600',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '0.25rem 2rem',
                             }}
                         >
-                            Lista de Clientes
+                            <TitleCardHeader>Lista de Clientes</TitleCardHeader>
+                            <Link
+                                href={`/printer/clientes`}
+                                passHref
+                                prefetch={false}
+                            >
+                                <a>
+                                    <Printer
+                                        src="/assets/imagenes/print-icon.png"
+                                        alt="imprime clientes"
+                                        data-tip="Imprime clientes"
+                                    />
+                                </a>
+                            </Link>
                         </CardHeader>
-                        <button onClick={printCliente}>Imprimir</button>
                         <CardBody
                             style={{
                                 backgroundColor: darkMode

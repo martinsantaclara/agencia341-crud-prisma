@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useReactToPrint } from 'react-to-print';
 
-import { ComponentToPrint } from '../../components/ComponentToPrint';
+import { ToPrint } from '../../../components/ToPrint/Clientes';
+import { useVentasContext } from '../../../context/StateContext';
 
-const ImprimePorFecha = () => {
+const ImprimeClientes = () => {
     const router = useRouter();
     const componentRef = useRef(null);
 
@@ -12,6 +13,35 @@ const ImprimePorFecha = () => {
 
     const [loading, setLoading] = useState(false);
     // const [text, setText] = useState('old boring text');
+    const { clientes } = useVentasContext();
+
+    const timeNow = new Date();
+
+    const fecha = new Date()
+        .toLocaleDateString('es-AR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+        })
+        .replaceAll('/', '-');
+    const time = new Date().toLocaleTimeString('es-AR', {
+        hour: 'numeric',
+        minute: 'numeric',
+    });
+
+    let hora = Array.from(time).map((digit) => {
+        return digit === ':' ? 'h' : digit;
+    });
+    hora.push('m');
+    hora = hora.join('');
+    console.log(hora);
+
+    // .replace(',', '');
+    // const fechaLarga = new Date().toLocaleString().replace(',', '');
+    console.log(fecha);
+    console.log(hora);
+
+    const titulo = `ListadoClientes ${fecha} ${hora}`;
 
     // console.log(ventas);
 
@@ -47,7 +77,7 @@ const ImprimePorFecha = () => {
 
     const handlePrint = useReactToPrint({
         content: reactToPrintContent,
-        documentTitle: 'Agencia 341-crud-prisma',
+        documentTitle: titulo,
         onBeforeGetContent: handleOnBeforeGetContent,
         // onBeforePrint: handleBeforePrint,
         onAfterPrint: handleAfterPrint,
@@ -72,9 +102,9 @@ const ImprimePorFecha = () => {
     return (
         <div>
             {loading && <p className="indicator">Creando Impresión...</p>}
-            <ComponentToPrint ref={componentRef} />
+            <ToPrint ref={componentRef} clientes={clientes} />
         </div>
     );
 };
 
-export default ImprimePorFecha;
+export default ImprimeClientes;

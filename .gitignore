@@ -21,6 +21,7 @@
 import*
 prueba.json
 readme.txt
+*.pdf
 
 # debug
 npm-debug.log*

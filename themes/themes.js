@@ -128,7 +128,8 @@ export const GlobalStyles = createGlobalStyle`
         font-family: ${({ theme }) => theme.ffBody};
         font-size: 1rem;
         overflow-x: hidden;
-        background-color: ${({ theme }) => theme.background};
+        background-color: ${({ theme, print }) =>
+            print ? 'white' : theme.background};
         color: ${({ theme }) => theme.onBackground};
     }
 

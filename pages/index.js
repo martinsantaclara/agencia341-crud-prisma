@@ -8,10 +8,6 @@ import { Resumen } from '../components/LandingPage/Resumen/resumen';
 
 const Home = () => {
     const { screenWidth } = useDeviceContext();
-
-    const database = process.env.USERNAME;
-    console.log(database);
-
     return (
         <>
             <Head>
